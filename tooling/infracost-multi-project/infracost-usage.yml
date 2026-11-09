@@ -1,0 +1,7 @@
+version: 0.1
+resource_type_default_usage:
+  azurerm_application_insights:
+    monthly_data_ingested_gb: 5
+resource_usage:
+  azurerm_application_insights.pulse[0]:
+    monthly_data_ingested_gb: 10

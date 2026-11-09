@@ -1,0 +1,37 @@
+formatter: "markdown table"
+
+sections:
+  hide:
+    - providers
+    - resources
+    - data-sources
+
+content: |-
+  {{ .Requirements }}
+
+  {{ .Modules }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: false
+  default: false
+  description: true
+  hide-empty: true
+  required: true
+  sensitive: true
+  type: false

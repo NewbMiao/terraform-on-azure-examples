@@ -1,0 +1,18 @@
+# The old model end to end: certificates from KV synced into the cluster via CSI.
+# The upper half of this chain (the SPC) is in kv-spc.yaml.
+# The volume lives in the controller Pod — as long as the Pod exists, the sync exists;
+# with rotation enabled it refreshes along with new KV versions.
+# Just merge this into the controller's Helm values; no new ingress component needed.
+# Usage: helm upgrade -f <this file>.
+controller:
+  extraVolumes:
+    - name: secrets-store-inline
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: crest-tls
+  extraVolumeMounts:
+    - name: secrets-store-inline
+      mountPath: /mnt/secrets-store
+      readOnly: true

@@ -1,0 +1,35 @@
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.108.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_tflint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+      - id: terraform_docs
+        args:
+          - --args=--config=.terraform-docs.yml
+      - id: terraform_checkov
+        stages: [pre-push]
+        args:
+          - --args=--config-file=.checkov.yaml
+
+  - repo: local
+    hooks:
+      - id: terraform_test
+        name: Terraform test — workload contract
+        entry: terraform -chdir=demo-stack test
+        language: system
+        verbose: true
+        files: ^demo-stack/.*\.(tf|tfvars|tftest\.hcl)$
+        pass_filenames: false
+
+      - id: infracost_diff
+        name: Infracost — compare with previous local scan
+        entry: sh hooks/infracost-diff.sh
+        language: system
+        verbose: true
+        stages: [pre-push]
+        files: ^(demo-stack/.*\.(tf|tfvars)|infracost\.yml)$
+        pass_filenames: false

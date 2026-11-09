@@ -1,0 +1,24 @@
+# checkov --config-file points here; directory scans only demo-stack.
+# Each skip below matches a CKV that Checkov currently hits in this directory (comment out the whole skip-check block and Failed grows — compare for yourself).
+directory:
+  - demo-stack
+compact: true
+quiet: true
+soft-fail: true
+
+skip-check:
+  # [Deferred] KV still allows public ingress; the PE isn't ready.
+  # Remove once: PE + private DNS land. Compare: demo-stack/harbor_kv.tf
+  - CKV_AZURE_189
+
+  # [Intentional] KV soft_delete_retention_days = 7 (EG convention).
+  # Revisit when: org policy moves to ≥90. Compare: demo-stack/harbor_kv.tf
+  - CKV_AZURE_42
+
+  # [Intentional] Runtime secrets carry no expiration_date.
+  # Revisit when: policy requires expiry on every secret. Compare: demo-stack/harbor_kv_secret.tf
+  - CKV_AZURE_41
+
+  # [Deferred] Team Blob has no Queue read/write/delete logging.
+  # Remove once: the shared diagnostics baseline lands. Compare: demo-stack/harbor_blob.tf (all Storage in this directory share this skip)
+  - CKV_AZURE_33

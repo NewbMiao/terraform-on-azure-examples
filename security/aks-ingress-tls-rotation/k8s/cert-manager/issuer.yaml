@@ -1,0 +1,21 @@
+# Create the issuer after Helm installs cert-manager; the solver only knows the child zone
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-dns01
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: le-account-key
+    solvers:
+      - selector:
+          dnsZones:
+            - crest.example.com
+        dns01:
+          azureDNS:
+            subscriptionID: 00000000-0000-0000-0000-00000000d005
+            resourceGroupName: RG-EG-DNS
+            hostedZoneName: crest.example.com
+            managedIdentity:
+              clientID: 00000000-0000-0000-0000-00000000c1d2

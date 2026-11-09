@@ -1,0 +1,8 @@
+directory:
+  - demo-stack
+
+framework:
+  - terraform
+
+compact: true
+quiet: true

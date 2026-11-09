@@ -1,0 +1,13 @@
+version: 0.1
+projects:
+  - path: stacks/pulse
+    name: pulse-dev
+    skip_autodetect: true
+    terraform_var_files:
+      - config/dev/terraform.auto.tfvars
+    usage_file: infracost-usage.yml
+  - path: stacks/pulse
+    name: pulse-prod
+    skip_autodetect: true
+    terraform_var_files:
+      - config/prod/terraform.auto.tfvars

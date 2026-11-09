@@ -1,0 +1,32 @@
+# The upper half of the old model: the SecretProviderClass declares "which certificate to pull
+# from KV and which Secret to land it in".
+# The lower half mounts the volume into the consumer — csi-ingress-mount.yaml mounts it on the controller.
+# secretObjects are only created/refreshed while a Pod mounts the volume; delete every consuming
+# Pod and the Secret goes away too.
+# Certificates are split per environment: dev uses its own KV certificate and SPC
+# (change the secretName to crest-tls-dev).
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: crest-tls
+  namespace: ingress-nginx
+spec:
+  provider: azure
+  parameters:
+    useVMManagedIdentity: "true"
+    userAssignedIdentityID: 00000000-0000-0000-0000-00000000c51e
+    keyvaultName: kv-crest-prod-sea
+    tenantId: 00000000-0000-0000-0000-00000000a1b2
+    objects: |
+      array:
+        - |
+          objectName: crest-api-prod
+          objectType: secret
+  secretObjects:
+    - secretName: crest-tls-prod
+      type: kubernetes.io/tls
+      data:
+        - objectName: crest-api-prod
+          key: tls.crt
+        - objectName: crest-api-prod
+          key: tls.key

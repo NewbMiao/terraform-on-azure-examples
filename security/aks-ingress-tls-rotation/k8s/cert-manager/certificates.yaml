@@ -1,0 +1,26 @@
+# One Certificate per environment: dnsNames matches the host of that environment's Ingress
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: crest-tls-dev
+  namespace: ingress-nginx
+spec:
+  secretName: crest-tls-dev
+  dnsNames:
+    - api-dev.crest.example.com
+  issuerRef:
+    name: letsencrypt-dns01
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: crest-tls-prod
+  namespace: ingress-nginx
+spec:
+  secretName: crest-tls-prod
+  dnsNames:
+    - api.crest.example.com
+  issuerRef:
+    name: letsencrypt-dns01
+    kind: ClusterIssuer

@@ -1,0 +1,51 @@
+# Forward path, not taken in this lesson: the managed ingress's built-in certificate approach.
+# Why this lives under future/: these two TLS options only work with a managed GatewayClass
+#   - approuting-istio: the AKS-managed Application Routing Gateway API implementation
+#   - istio: the Istio service mesh add-on
+# Both are a different ingress data plane. Swapping ingress just to load one certificate
+# isn't worth it; that decision should be driven by the Ingress NGINX retirement
+# (upstream maintenance ends 2026-03, AKS patches until 2026-11).
+#
+# When you do migrate: the listener only takes the two TLS options, and the app routing
+# operator builds the SecretProviderClass, syncs the Secret, and backfills certificateRefs itself.
+# Do not pin a version in the certificate URI, or you're stuck on that version even after KV rotates.
+# You also need a Workload Identity ServiceAccount + Key Vault Secrets User.
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: crest-api
+  namespace: ingress-nginx
+spec:
+  gatewayClassName: approuting-istio
+  listeners:
+    - name: https
+      hostname: api.crest.example.com
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        options:
+          kubernetes.azure.com/tls-cert-keyvault-uri: https://kv-crest-prod-sea.vault.azure.net/certificates/crest-api-prod
+          kubernetes.azure.com/tls-cert-service-account: crest-gw-cert
+      allowedRoutes:
+        namespaces:
+          from: Same
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: crest-api
+  namespace: ingress-nginx
+spec:
+  parentRefs:
+    - name: crest-api
+  hostnames:
+    - api.crest.example.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: crest-api
+          port: 80

@@ -1,0 +1,21 @@
+# Ingress controller Service: the internal ILB + PLS are created by the cloud controller from the annotations
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    service.beta.kubernetes.io/azure-pls-create: "true"
+    service.beta.kubernetes.io/azure-pls-name: "pls-crest-ingress-internal-dev"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/component: controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: https
+      port: 443
+      targetPort: https
