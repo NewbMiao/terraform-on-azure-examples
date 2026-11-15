@@ -4,20 +4,21 @@ Local gate example, split into two tiers:
 
 | Git stage | Checks |
 |-----------|--------|
-| `pre-commit` | fmt, validate, TFLint, terraform-docs, `terraform test` |
+| `pre-commit` | fmt, validate, TFLint, terraform-docs, `terraform test`, `tfpolicy test` (via `../tfpolicy-mock-guards/`) |
 | `pre-push` | Checkov, Infracost previous → current diff |
 
 ## Files
 
 | File | Contents |
 |------|----------|
-| `.pre-commit-config.yaml` | The two hook tiers; `terraform_test` and `infracost_diff` are local hooks |
+| `.pre-commit-config.yaml` | Two hook tiers; local `terraform_test`, `tfpolicy_test`, and `infracost_diff` |
 | `demo-stack/terraform.auto.tfvars` | relay / pulse workloads |
 | `demo-stack/locals.tf` | Platform tags merged, then handed to downstream resources |
 | `demo-stack/workloads.tf` | Container Apps played by `terraform_data` |
 | `demo-stack/workload_contract.tftest.hcl` | Checks environment, replicas, and platform tags |
 | `infracost.yml` | Infracost project entry, shared with the pre-push hook |
 | `hooks/infracost-diff.sh` | Saves the last scan, then produces current + diff |
+| `hooks/tfpolicy-test.sh` | Runs `tfpolicy validate` and `test` on the sibling policy example (install the `tfpolicy` CLI first) |
 | `.gitignore` | Ignores the locally generated `.reports/` |
 
 ## Verify Terraform first
@@ -37,6 +38,7 @@ Back at the example root:
 ```bash
 pre-commit install --install-hooks -t pre-commit -t pre-push
 pre-commit run terraform_test --all-files
+pre-commit run tfpolicy_test --all-files
 pre-commit run infracost_diff --all-files --hook-stage pre-push
 ```
 
