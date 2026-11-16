@@ -1,43 +1,52 @@
+# Run from the terraform-on-azure-examples repository root
+# (this case is published as tooling/pre-commit-iac-gates/).
+default_install_hook_types: [pre-commit, pre-push]
+
 repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.108.0
     hooks:
       - id: terraform_fmt
+        files: ^tooling/pre-commit-iac-gates/
       - id: terraform_validate
+        files: ^tooling/pre-commit-iac-gates/
       - id: terraform_tflint
         args:
-          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+          - --args=--config=__GIT_WORKING_DIR__/tooling/pre-commit-iac-gates/.tflint.hcl
+        files: ^tooling/pre-commit-iac-gates/
       - id: terraform_docs
         args:
-          - --args=--config=.terraform-docs.yml
+          - --args=--config=tooling/pre-commit-iac-gates/.terraform-docs.yml
+        files: ^tooling/pre-commit-iac-gates/
       - id: terraform_checkov
         stages: [pre-push]
         args:
-          - --args=--config-file=.checkov.yaml
+          - --args=--config-file=__GIT_WORKING_DIR__/tooling/pre-commit-iac-gates/.checkov.yaml
+        files: ^tooling/pre-commit-iac-gates/
 
   - repo: local
     hooks:
       - id: terraform_test
         name: Terraform test — workload contract
-        entry: terraform -chdir=demo-stack test
+        entry: terraform -chdir=tooling/pre-commit-iac-gates/demo-stack test
         language: system
-        verbose: true
-        files: ^demo-stack/.*\.(tf|tfvars|tftest\.hcl)$
         pass_filenames: false
+        verbose: true
+        files: ^tooling/pre-commit-iac-gates/demo-stack/
 
       - id: tfpolicy_test
         name: Terraform Policy — policytest
-        entry: sh hooks/tfpolicy-test.sh
+        entry: bash -c 'tfpolicy validate --policies=tooling/tfpolicy-mock-guards/policies && tfpolicy test --policies=tooling/tfpolicy-mock-guards/policies --tests=tooling/tfpolicy-mock-guards/tests'
         language: system
-        stages: [pre-commit]
-        files: ^(\.\./tfpolicy-mock-guards/|hooks/tfpolicy-test\.sh)
         pass_filenames: false
+        stages: [pre-commit]
+        always_run: true
 
       - id: infracost_diff
         name: Infracost — compare with previous local scan
-        entry: sh hooks/infracost-diff.sh
-        language: system
+        entry: tooling/pre-commit-iac-gates/hooks/infracost-diff.sh
+        language: script
+        pass_filenames: false
         verbose: true
         stages: [pre-push]
-        files: ^(demo-stack/.*\.(tf|tfvars)|infracost\.yml)$
-        pass_filenames: false
+        files: ^tooling/pre-commit-iac-gates/

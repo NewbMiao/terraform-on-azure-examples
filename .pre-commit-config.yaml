@@ -1,0 +1,31 @@
+# cd terraform-on-azure-examples && pre-commit install -t pre-commit -t pre-push
+# Lesson-style two-tier gates (Checkov, Infracost, full hook set): tooling/pre-commit-iac-gates/.pre-commit-config.yaml
+
+default_install_hook_types: [pre-commit, pre-push]
+
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.108.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_tflint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+
+  - repo: local
+    hooks:
+      - id: terraform_test_pre_commit_demo
+        name: Terraform test — pre-commit demo stack
+        entry: terraform -chdir=tooling/pre-commit-iac-gates/demo-stack test
+        language: system
+        pass_filenames: false
+        verbose: true
+        files: ^tooling/pre-commit-iac-gates/
+
+      - id: tfpolicy_test
+        name: Terraform Policy — policytest (tooling)
+        entry: bash -c 'tfpolicy validate --policies=tooling/tfpolicy-mock-guards/policies && tfpolicy test --policies=tooling/tfpolicy-mock-guards/policies --tests=tooling/tfpolicy-mock-guards/tests'
+        language: system
+        pass_filenames: false
+        files: ^tooling/(tfpolicy-mock-guards|pre-commit-iac-gates)/

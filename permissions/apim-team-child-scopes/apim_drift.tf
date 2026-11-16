@@ -12,7 +12,7 @@ resource "terraform_data" "apim_api_platform" {
   }
 }
 
-# Plays azurerm_api_management_api.app_portal — Portal is the SSOT
+# Plays azurerm_api_management_api.app_portal — portal catalog owns the OpenAPI import
 resource "terraform_data" "apim_api_portal" {
   for_each = local.app_http_apis_portal
 

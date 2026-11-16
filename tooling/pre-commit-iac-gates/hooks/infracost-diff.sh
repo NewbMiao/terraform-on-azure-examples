@@ -1,6 +1,9 @@
 #!/bin/sh
 set -eu
 
+root="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)"
+cd "${root}"
+
 report_dir=".reports"
 current_report="${report_dir}/infracost-current.json"
 previous_report="${report_dir}/infracost-previous.json"

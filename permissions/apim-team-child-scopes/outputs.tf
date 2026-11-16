@@ -1,5 +1,5 @@
 output "portal_managed_api_ignore" {
-  description = "Portal-SSOT APIs: apply does not overwrite the OpenAPI import / API policy."
+  description = "Portal-owned APIs: apply does not overwrite the OpenAPI import / API policy."
   value = {
     for k, v in terraform_data.apim_api_portal : k => v.input.lifecycle_ignore
   }
