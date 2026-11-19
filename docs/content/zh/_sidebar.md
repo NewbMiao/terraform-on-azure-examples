@@ -1,0 +1,36 @@
+- [开篇](/content/zh/opening.md)
+- **第一幕 · 权限自治**
+  - [1.1 共享账号：故事开始的地方](/content/zh/team-rg-sgrp-access.md)
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">1.2 Pipeline 也要和共享账号说不</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">1.3 Pipeline 归团队后，变量组却连不上 KV 了</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">1.4 共享账号：通知收权之后</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">1.5 门内有秩序，门外有边界</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">1.6 站点权限没动，知识库同步怎么突然断了</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">1.7 多 tenant 共用门户，每条线各建一个 App？</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">1.8 APIM 按团队改，别直接给 Contributor</span>
+- **第二幕 · 安全加固**
+  - [2.0 公网扫描打到数据库，才发现子网边界没划清](/content/zh/shared-vnet-subnet-nsg-edges.md)
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.1 数据库进了私网，流水线先断了</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.2 旧环境接不了 VNet，应用怎么搬进内网</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.3 集群不再开公网，用户流量从哪里进来</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.4 证书越换越勤，Ingress 上那张谁来续</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.5 旧子网刚删，dev 和 prod 怎么一起断了</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.6 第三方只认固定出口，别急着再建一套 NAT</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.7 WAF 例外越加越多，一次改动开始牵连所有应用</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">2.8 前端只改一句文案，发版后怎么还是旧页面</span>
+- **第三幕 · 运维与成本**
+  - [3.0 每季度调一次容量，别把上个月的镜像一起写回去](/content/zh/aca-size-pipeline-boundary.md)
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">3.1 同一份密码散落几处，轮换时谁也不敢动</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">3.2 凌晨挂掉的那个 app，早上才有人知道</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">3.3 新 job 明明有日志，组织仓库里怎么一条都没有</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">3.4 闲置的 app 烧出两个月预算，报警要赶在月中响</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">3.5 月初的成本报告，不该等谁上班了才有</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">3.6 节点挤了就要加机器？先把 request 和用量对齐</span>
+- **番外 · 工具箱**
+  - [T1 Checkov：从写得通到更合规](/content/zh/checkov-scope-and-skips.md)
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">T2 TFLint：让统一风格落进代码</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">T3 terraform-docs：让模块契约跟着代码走</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">T4 Infracost：把成本提前到提交时</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">T5 terraform test：逻辑校验也不能丢</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">T6 tfpolicy：全平台只维护一份底线，写进 `policy.hcl`</span>
+  - <span class="lesson-catalog-muted" title="全书仅 Leanpub">T7 pre-commit：把门禁搬到流水线之前</span>

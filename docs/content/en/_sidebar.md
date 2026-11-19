@@ -1,0 +1,36 @@
+- [Opening](/content/en/opening.md)
+- **Act 1 · Permission Autonomy: from a shared account to "teams ship on their own"**
+  - [1.1 Where the story begins: the shared account](/content/en/team-rg-sgrp-access.md)
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">1.2 Pipelines, too, had to drop the shared account</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">1.3 The pipeline went to the team — so why can't the variable group reach the vault?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">1.4 The Shared Account: After Access Is Revoked</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">1.5 Order inside the door, boundaries outside it</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">1.6 Site permissions never changed — so why did knowledge-base sync suddenly break?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">1.7 Multiple tenants sharing one portal — does every business line need its own app?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">1.8 Let Teams Edit Their Own APIM APIs—Without Handing Out Contributor</span>
+- **Act 2 · Security hardening: bring the app inside without losing the way in**
+  - [2.0 A public scan reached the database — the subnet boundaries were never drawn](/content/en/shared-vnet-subnet-nsg-edges.md)
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.1 The database went private; the pipeline broke first</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.2 The old environment can't join a VNet — how do apps move inside?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.3 The cluster no longer opens to the public — where does user traffic enter?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.4 Certificates Are Rotated More Often Now—Who Renews the One on Ingress?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.5 The old subnet was just deleted — why did dev and prod both go down?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.6 A third party insists on a fixed egress — don't rush to build another NAT</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.7 WAF exclusions keep piling up, and one change now hits every app</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">2.8 The front end changed one line of copy — why does the release still serve the old page?</span>
+- **Act 3 · Operations, monitoring, and cost: keep it changeable, visible, and affordable**
+  - [3.0 Quarterly capacity tuning — don't write last month's image back](/content/en/aca-size-pipeline-boundary.md)
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">3.1 The same password scattered in several places — nobody dares rotate it</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">3.2 An App Died at 3 a.m.—and Nobody Noticed Until Morning</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">3.3 The new job has logs — why is the org's workspace empty?</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">3.4 An idle app burned two months of budget — the alert must fire mid-month</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">3.5 The month-start cost report shouldn't wait for someone to come online</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">3.6 Nodes under pressure — add machines? Align requests with usage first</span>
+- **Extra · Toolbox: make quality checks part of the working day**
+  - [T1 Checkov: From “It Runs” to “It's Compliant”](/content/en/checkov-scope-and-skips.md)
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">T2 TFLint: put the naming standard in code</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">T3 terraform-docs: let the module contract follow the code</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">T4 Infracost: Bring Cost Checks Forward to Commit Time</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">T5 terraform test: logic checks cannot be dropped</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">T6 Terraform Policy: one shared baseline in policy.hcl</span>
+  - <span class="lesson-catalog-muted" title="Full book on Leanpub">T7 pre-commit: move the gates ahead of the pipeline</span>

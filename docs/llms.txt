@@ -1,0 +1,29 @@
+# Terraform on Azure — Sample Chapters
+> 31 production lessons in Terraform on Azure: permissions, private networking, monitoring, and cost — each starting from a real incident, each verified by plan. Free sample chapters with runnable examples.
+
+Terraform on Azure — free sample chapters (Docsify reader + raw markdown). Runnable examples on GitHub; full book on Leanpub.
+
+## Docs (markdown — good for agents)
+
+- [Opening (English)](https://terraform-on-azure.pages.dev/content/en/opening.md)
+- [开篇 (中文)](https://terraform-on-azure.pages.dev/content/zh/opening.md)
+
+## Sample lessons
+
+- [Where the story begins: the shared account](https://terraform-on-azure.pages.dev/content/en/team-rg-sgrp-access.md): English lesson markdown
+- [共享账号：故事开始的地方](https://terraform-on-azure.pages.dev/content/zh/team-rg-sgrp-access.md): 中文课时
+- [A public scan reached the database — the subnet boundaries were never drawn](https://terraform-on-azure.pages.dev/content/en/shared-vnet-subnet-nsg-edges.md): English lesson markdown
+- [公网扫描打到数据库，才发现子网边界没划清](https://terraform-on-azure.pages.dev/content/zh/shared-vnet-subnet-nsg-edges.md): 中文课时
+- [Quarterly capacity tuning — don't write last month's image back](https://terraform-on-azure.pages.dev/content/en/aca-size-pipeline-boundary.md): English lesson markdown
+- [每季度调一次容量，别把上个月的镜像一起写回去](https://terraform-on-azure.pages.dev/content/zh/aca-size-pipeline-boundary.md): 中文课时
+- [Checkov: From “It Runs” to “It's Compliant”](https://terraform-on-azure.pages.dev/content/en/checkov-scope-and-skips.md): English lesson markdown
+- [Checkov：从写得通到更合规](https://terraform-on-azure.pages.dev/content/zh/checkov-scope-and-skips.md): 中文课时
+
+## More
+
+- [Leanpub — full book](https://leanpub.com/terraform-on-azure)
+- [GitHub — terraform examples](https://github.com/NewbMiao/terraform-on-azure-examples)
+- [Sitemap](https://terraform-on-azure.pages.dev/sitemap.xml)
+- [Reader (interactive)](https://terraform-on-azure.pages.dev/)
+
+简体摘要: 《Terraform on Azure》在线样章：权限自治、专网与安全、运维与成本；每课附可本地 plan 的示例。

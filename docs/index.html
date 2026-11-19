@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terraform on Azure — Sample Chapters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" id="meta-description" content="31 production lessons in Terraform on Azure: permissions, private networking, monitoring, and cost — each starting from a real incident, each verified by plan. Free sample chapters with runnable examples." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://terraform-on-azure.pages.dev/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Terraform on Azure — Sample Chapters" />
+  <meta property="og:title" content="Terraform on Azure — Sample Chapters" />
+  <meta property="og:description" id="meta-og-description" content="31 production lessons in Terraform on Azure: permissions, private networking, monitoring, and cost — each starting from a real incident, each verified by plan. Free sample chapters with runnable examples." />
+  <meta property="og:url" content="https://terraform-on-azure.pages.dev/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Terraform on Azure — Sample Chapters" />
+  <meta name="twitter:description" id="meta-twitter-description" content="31 production lessons in Terraform on Azure: permissions, private networking, monitoring, and cost — each starting from a real incident, each verified by plan. Free sample chapters with runnable examples." />
+  <meta property="og:image" content="https://terraform-on-azure.pages.dev/resources/cover.png" />
+  <meta name="twitter:image" content="https://terraform-on-azure.pages.dev/resources/cover.png" />
+  <script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "name": "Terraform on Azure — Sample Chapters", "url": "https://terraform-on-azure.pages.dev/", "description": "31 production lessons in Terraform on Azure: permissions, private networking, monitoring, and cost — each starting from a real incident, each verified by plan. Free sample chapters with runnable examples.", "inLanguage": ["en", "zh"]}, {"@type": "ItemList", "name": "Free sample chapters", "itemListElement": [{"@type": "ListItem", "position": 1, "url": "https://terraform-on-azure.pages.dev/content/en/opening.md", "name": "Preface / opening"}, {"@type": "ListItem", "position": 2, "url": "https://terraform-on-azure.pages.dev/content/en/team-rg-sgrp-access.md", "name": "Where the story begins: the shared account"}, {"@type": "ListItem", "position": 3, "url": "https://terraform-on-azure.pages.dev/content/en/shared-vnet-subnet-nsg-edges.md", "name": "A public scan reached the database — the subnet boundaries were never drawn"}, {"@type": "ListItem", "position": 4, "url": "https://terraform-on-azure.pages.dev/content/en/aca-size-pipeline-boundary.md", "name": "Quarterly capacity tuning — don't write last month's image back"}, {"@type": "ListItem", "position": 5, "url": "https://terraform-on-azure.pages.dev/content/en/checkov-scope-and-skips.md", "name": "Checkov: From “It Runs” to “It's Compliant”"}]}]}
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5G6G0L6594"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5G6G0L6594', { send_page_view: false });
+  </script>
+  <link rel="alternate" type="text/plain" href="llms.txt" title="Plain-text chapter index" />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/vue.css" />
+  <style>
+    #lang-switch {
+      position: fixed; top: 10px; right: 14px; z-index: 100001;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex; align-items: center; gap: 8px; font-size: 14px;
+      pointer-events: auto;
+    }
+    #contact-wrap {
+      position: relative;
+      margin-left: 6px;
+    }
+    #lang-switch button#contact-link {
+      margin: 0; padding: 4px 6px; cursor: pointer;
+      border: none; border-radius: 4px; background: transparent;
+      color: #42b983; font: inherit;
+    }
+  #lang-switch button#contact-link:hover {
+      text-decoration: underline;
+    }
+    #contact-tip {
+      display: none; position: absolute; top: calc(100% + 6px); right: 0;
+      padding: 6px 10px; border-radius: 4px; white-space: nowrap;
+      background: #333; color: #fff; font-size: 13px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); z-index: 2;
+    }
+    #contact-tip.show {
+      display: block;
+    }
+    #lang-switch button {
+      margin-left: 6px; padding: 4px 10px; cursor: pointer;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+    #lang-switch button.active {
+      font-weight: 600; border-color: #42b983; color: #42b983;
+    }
+    .sidebar-nav .lesson-catalog-muted {
+      color: #b8b8b8;
+      cursor: default;
+      font-size: 0.92em;
+    }
+    .sidebar-nav .lesson-catalog-muted:hover {
+      color: #b8b8b8;
+    }
+    /* Diagram frame: white pad, same as exported book figures */
+    .markdown-section img[src*="resources/"],
+    .markdown-section .mermaid {
+      display: block;
+      margin: 1.2em auto;
+      max-width: 100%;
+      background: #fff;
+      padding: 10px 12px;
+      box-sizing: border-box;
+    }
+    .markdown-section .mermaid {
+      overflow-x: auto;
+      text-align: center;
+    }
+    .markdown-section .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="lang-switch">
+    <span id="lang-label">Language</span>
+    <button type="button" id="btn-en" data-lang="en">EN</button>
+    <button type="button" id="btn-zh" data-lang="zh">中文</button>
+    <span id="contact-wrap">
+      <button type="button" id="contact-link">Contact me</button>
+      <span id="contact-tip" role="status"></span>
+    </span>
+  </div>
+  <div id="app">Loading…</div>
+  <script>
+    (function () {
+      var DEFAULT = 'en';
+      var lang = localStorage.getItem('sample-lang') || DEFAULT;
+      if (lang !== 'en' && lang !== 'zh') lang = DEFAULT;
+
+      function markActive() {
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+      }
+      function setLang(next) {
+        localStorage.setItem('sample-lang', next);
+        var root = window.location.pathname + window.location.search;
+        var dest = root + '#/content/' + next + '/opening';
+        window.location.replace(dest);
+        window.location.reload();
+      }
+
+      function ensureLangHomeHash() {
+        var h = (window.location.hash || '').replace(/^#/, '');
+        if (!h || h === '/') {
+          window.location.replace(
+            window.location.pathname + window.location.search + '#/content/' + lang + '/opening'
+          );
+        }
+      }
+      ensureLangHomeHash();
+      document.getElementById('btn-en').addEventListener('click', function () { setLang('en'); });
+      document.getElementById('btn-zh').addEventListener('click', function () { setLang('zh'); });
+      markActive();
+      var contactEmail = 'newbvirgil@gmail.com';
+      var contact = document.getElementById('contact-link');
+      var contactTip = document.getElementById('contact-tip');
+      var contactTipTimer = 0;
+      contact.textContent = lang === 'zh' ? '联系我' : 'Contact me';
+      contact.addEventListener('click', function () {
+        contactTip.textContent = contactEmail;
+        contactTip.classList.add('show');
+        clearTimeout(contactTipTimer);
+        contactTipTimer = setTimeout(function () {
+          contactTip.classList.remove('show');
+        }, 8000);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(contactEmail).catch(function () {});
+        }
+      });
+      document.getElementById('lang-label').textContent = lang === 'zh' ? '语言' : 'Language';
+
+      var SEO_DESC = {"en": "31 production lessons in Terraform on Azure: permissions, private networking, monitoring, and cost — each starting from a real incident, each verified by plan. Free sample chapters with runnable examples.", "zh": "《Terraform on Azure》在线样章：权限自治、专网与安全、运维与成本；每课附可本地 plan 的示例。"};
+      function applySeoDescription() {
+        var d = (SEO_DESC[lang] || SEO_DESC.en || '').trim();
+        if (!d) return;
+        ['meta-description', 'meta-og-description', 'meta-twitter-description'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.setAttribute('content', d);
+        });
+      }
+      applySeoDescription();
+
+      var _host = window.location.hostname;
+      var _base = '';
+      if (_host === 'localhost' || _host === '127.0.0.1') {
+        _base = '';
+      } else if (_host.endsWith('github.io')) {
+        _base = '/terraform-on-azure-examples/';
+      } else {
+        _base = '/';
+      }
+      var _search = lang === 'zh'
+        ? { paths: 'auto', placeholder: '搜索', noData: '无结果' }
+        : { paths: 'auto', placeholder: 'Search', noData: 'No results' };
+
+      window.$docsify = {
+        name: 'Terraform on Azure — Sample Chapters',
+        homepage: 'content/' + lang + '/opening.md',
+        basePath: _base,
+        loadSidebar: '_sidebar.md',
+        alias: {
+          '/_sidebar.md': 'content/' + lang + '/_sidebar.md',
+          '/.*/_sidebar.md': 'content/' + lang + '/_sidebar.md',
+        },
+        subMaxLevel: 3,
+        auto2top: true,
+        relativePath: false,
+        routerMode: 'hash',
+        ext: '.md',
+        search: _search,
+      };
+    })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/docsify.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/search.min.js" crossorigin="anonymous"></script>
+  <script src="vendor/docsify/prism/prism-hcl.min.js" crossorigin="anonymous"></script>
+  <script>
+
+    var MERMAID_SRC = 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js';
+    var mermaidReady = null;
+    function ensureMermaid() {
+      if (typeof mermaid !== 'undefined') return Promise.resolve();
+      if (mermaidReady) return mermaidReady;
+      mermaidReady = new Promise(function (resolve, reject) {
+        var s = document.createElement('script');
+        s.src = MERMAID_SRC;
+        s.crossOrigin = 'anonymous';
+        s.onload = function () {
+          mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: 'loose',
+            theme: 'neutral',
+            themeVariables: {
+              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+              fontSize: '13px',
+              primaryColor: '#ffffff',
+              primaryTextColor: '#111111',
+              primaryBorderColor: '#111111',
+              lineColor: '#333333',
+              secondaryColor: '#ffffff',
+              tertiaryColor: '#ffffff',
+            },
+            flowchart: { htmlLabels: true, curve: 'linear' },
+          });
+          resolve();
+        };
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+      return mermaidReady;
+    }
+    window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook) {
+      hook.doneEach(function () {
+        var codes = document.querySelectorAll(
+          '.markdown-section pre > code.lang-mermaid, .markdown-section pre > code.language-mermaid'
+        );
+        if (!codes.length) return;
+        ensureMermaid().then(function () {
+          codes.forEach(function (code) {
+            var box = document.createElement('div');
+            box.className = 'mermaid';
+            box.textContent = code.textContent;
+            code.parentNode.replaceWith(box);
+          });
+          mermaid.run({ nodes: document.querySelectorAll('.markdown-section .mermaid') });
+        }).catch(function () {});
+      });
+    });
+    window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook) {
+      hook.doneEach(function () {
+        var h1 = document.querySelector('.markdown-section h1');
+        var siteTitle = 'Terraform on Azure — Sample Chapters';
+        if (h1 && h1.textContent) {
+          document.title = h1.textContent.trim() + ' · ' + siteTitle;
+        }
+      });
+    });
+    window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook) {
+      hook.doneEach(function () {
+        var base = window.$docsify.basePath || '';
+        document.querySelectorAll('.markdown-section img[src]').forEach(function (img) {
+          var s = img.getAttribute('src');
+          if (!s || /^https?:\/\//i.test(s)) return;
+          var rel = s.split('?')[0].split('#')[0];
+          if (rel.indexOf('content/') !== -1) {
+            var m = rel.match(/resources\/[^/]+$/);
+            if (m) rel = m[0];
+          }
+          rel = rel.replace(/^(\.\.\/)+/, '');
+          if (rel.indexOf('resources/') === 0) img.src = base + rel;
+        });
+      });
+    });
+
+    window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook) {
+      function ga4PageView() {
+        if (typeof gtag !== 'function') return;
+        var path = (window.location.pathname || '/') + (window.location.hash || '');
+        gtag('event', 'page_view', {
+          page_path: path,
+          page_title: document.title || '',
+        });
+      }
+      hook.doneEach(ga4PageView);
+    });
+  </script>
+</body>
+</html>

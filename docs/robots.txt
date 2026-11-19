@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sample chapters for LLMs — https://llmstxt.org/
+# LLM summary: https://terraform-on-azure.pages.dev/llms.txt
+
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://terraform-on-azure.pages.dev/sitemap.xml

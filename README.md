@@ -2,6 +2,8 @@
 
 Companion examples for [*Terraform on Azure — Platform Governance in Practice*](https://leanpub.com/terraform-on-azure). No Azure subscription needed (`terraform_data` + locals).
 
+**Sample chapters:** [GitHub Pages](https://newbmiao.github.io/terraform-on-azure-examples/).
+
 ```bash
 cd <permissions|security|maintenance|tooling>/<case>/
 terraform init && terraform plan

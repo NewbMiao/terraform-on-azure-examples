@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://terraform-on-azure.pages.dev/</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/en/opening.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/zh/opening.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/en/team-rg-sgrp-access.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/zh/team-rg-sgrp-access.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/en/shared-vnet-subnet-nsg-edges.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/zh/shared-vnet-subnet-nsg-edges.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/en/aca-size-pipeline-boundary.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/zh/aca-size-pipeline-boundary.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/en/checkov-scope-and-skips.md</loc></url>
+  <url><loc>https://terraform-on-azure.pages.dev/content/zh/checkov-scope-and-skips.md</loc></url>
+</urlset>

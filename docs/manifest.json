@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-11-19T02:46:57Z",
+  "github_pages_base": "/terraform-on-azure-examples/",
+  "leanpub_url": "https://leanpub.com/terraform-on-azure",
+  "default_language": "en",
+  "languages": [
+    "en",
+    "zh"
+  ],
+  "chapters": [
+    {
+      "file": "team-rg-sgrp-access.md",
+      "slug": "team-rg-sgrp-access",
+      "title_en": "Where the story begins: the shared account",
+      "title_zh": "共享账号：故事开始的地方",
+      "zh_available": true,
+      "act": "part1",
+      "example_dir": "permissions/team-permissions/"
+    },
+    {
+      "file": "shared-vnet-subnet-nsg-edges.md",
+      "slug": "shared-vnet-subnet-nsg-edges",
+      "title_en": "A public scan reached the database — the subnet boundaries were never drawn",
+      "title_zh": "公网扫描打到数据库，才发现子网边界没划清",
+      "zh_available": true,
+      "act": "part2",
+      "example_dir": "security/shared-vnet-subnet-nsg-edges/"
+    },
+    {
+      "file": "aca-size-pipeline-boundary.md",
+      "slug": "aca-size-pipeline-boundary",
+      "title_en": "Quarterly capacity tuning — don't write last month's image back",
+      "title_zh": "每季度调一次容量，别把上个月的镜像一起写回去",
+      "zh_available": true,
+      "act": "part3",
+      "example_dir": "maintenance/aca-size-update/"
+    },
+    {
+      "file": "checkov-scope-and-skips.md",
+      "slug": "checkov-scope-and-skips",
+      "title_en": "Checkov: From “It Runs” to “It's Compliant”",
+      "title_zh": "Checkov：从写得通到更合规",
+      "zh_available": true,
+      "act": "part4",
+      "example_dir": "tooling/checkov-workflow/"
+    }
+  ]
+}
